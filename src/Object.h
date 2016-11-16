@@ -25,7 +25,7 @@ namespace ar {
 
         sf::Sprite getSprite() {
             return sprite;
-        }
+        };
 
         void move(float p_position_x, float p_position_y);
 

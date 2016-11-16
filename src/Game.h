@@ -4,6 +4,7 @@
 #include <SFML/Audio.hpp>
 #include <vector>
 #include "Object.h"
+#include "Tilemap.h"
 // import game object classes
 
 // defines for game
@@ -33,8 +34,8 @@ namespace ar {
         bool is_paused;
 
         // game objects
-        ar::Object example_object;
-        sf::Texture example_texture;
+        ar::Tilemap tilemap;
+        sf::Texture tilemap_texture;
     };
 }
 #endif // GAME_H

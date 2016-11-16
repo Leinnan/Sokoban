@@ -2,7 +2,8 @@
 
 namespace ar {
 
-    Game::Game(sf::RenderWindow *p_window_pointer) {
+    Game::Game(sf::RenderWindow *p_window_pointer) :
+        tilemap("/home/piotr/Projekty/Sokoban/build/maps/1.txt") {
         window_pointer = p_window_pointer;
         if(bg_music.openFromFile("./Sounds/bg_music.ogg")){
             bg_music.setVolume(33.f);
@@ -11,11 +12,10 @@ namespace ar {
 
         is_game_running = true;
         is_paused = false;
-// TODO checking is musig exist
         frame_time = sf::seconds(1.f / 60.f);
-        example_texture.loadFromFile("./test.png");
-        example_object.setPosition(2.f,5.f);
-        example_object.setTexture(&example_texture);
+        tilemap_texture.loadFromFile("./gfx/tilemap_smaller.png");
+
+        tilemap.setTileMapTex(&tilemap_texture);
 
         this->run();
     }
@@ -82,7 +82,7 @@ namespace ar {
     void Game::render() {
         window_pointer->clear(sf::Color(75, 203, 208));
         // here draw objects
-        example_object.draw(window_pointer);
+        tilemap.draw(window_pointer);
         window_pointer->display();
 
     }
