@@ -32,6 +32,13 @@ namespace ar {
         sf::Music bg_music;
         bool is_game_running;
         bool is_paused;
+        bool show_fps = true;
+
+        // base font
+        sf::Font basic_font;
+
+        // fps label
+        sf::Text fps_text;
 
         // game objects
         ar::Tilemap tilemap;

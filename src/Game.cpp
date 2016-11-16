@@ -10,6 +10,13 @@ namespace ar {
             bg_music.setLoop(true);
         }
 
+        basic_font.loadFromFile("./gfx/font.ttf");
+
+        fps_text.setFont(basic_font);
+        fps_text.setFillColor(sf::Color::Black);
+        fps_text.setCharacterSize(15);
+        fps_text.setPosition(sf::Vector2f(window_pointer->getSize().x-100.f,10.f));
+
         is_game_running = true;
         is_paused = false;
         frame_time = sf::seconds(1.f / 60.f);
@@ -58,17 +65,21 @@ namespace ar {
         bg_music.play();
 
 
-        sf::Clock clock;
-        sf::Time elapsed_time_since_update = sf::Time::Zero;
+        sf::Clock delta_clock;
+        sf::Time delta_time;
+        float last_time = 0;
+        std::string fps_string = "none";
         while (is_game_running) {
-
-            sf::Time elapsed_time = clock.restart();
-            elapsed_time_since_update += elapsed_time;
-            if (elapsed_time_since_update > frame_time) {
-                elapsed_time_since_update -= frame_time;
-                this->handleEvents();
-                this->update(frame_time);
-                this->render();
+            this->handleEvents();
+            this->update(delta_time);
+            this->render();
+            delta_time = delta_clock.restart();
+            if(show_fps){
+                fps_string = std::to_string(1.f / (delta_time.asSeconds() - last_time));
+                fps_string = fps_string.substr(0,4);
+                fps_string += " FPS";
+                last_time = delta_time.asSeconds();
+                fps_text.setString(fps_string);
             }
         }
     }
@@ -83,6 +94,11 @@ namespace ar {
         window_pointer->clear(sf::Color(75, 203, 208));
         // here draw objects
         tilemap.draw(window_pointer);
+
+        //interface last
+        if(show_fps){
+            window_pointer->draw(fps_text);
+        }
         window_pointer->display();
 
     }
