@@ -52,6 +52,16 @@ namespace ar {
             balls.push_back(new_ball);
         }
     }
+    int Game::getBallIndexInTile(sf::Vector2i p_tile) {
+        unsigned int index = 0;
+        for (auto &&ball : balls) {
+            if(ball.getCurrentTile() == p_tile)
+                return index;
+            index++;
+        }
+        // if no Ball in this pos return -1
+        return -1;
+    }
 
 
     void Game::handleEvents() {
@@ -69,9 +79,6 @@ namespace ar {
                     player.move(M_RIGHT);
                 if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
                     player.move(M_DOWN);
-
-
-
             }
 
 
@@ -121,13 +128,14 @@ namespace ar {
 
     void Game::update(sf::Time p_time_delta) {
         if (!is_paused) {
-            if(player.isMoving())
-                std::clog << "PLAYER UPDATE " << player.getPosition().x << ", " << player.getPosition().y << "\n";
             if(player.isMoving()){
+                std::clog << "PLAYER UPDATE " << player.getPosition().x << ", " << player.getPosition().y << "\n";
                 sf::Vector2i destination_index = player.getDestinationTile();
                 if(!tilemap.isTilePassable(destination_index.x,destination_index.y)){
                     player.canMove(false);
                 }
+                if(getBallIndexInTile(player.getDestinationTile()) != -1)
+                    player.canMove(false);
             }
             player.update(p_time_delta);
         }

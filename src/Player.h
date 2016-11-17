@@ -25,6 +25,7 @@ public:
     void setTilePosition(sf::Vector2i p_new_pos);
     inline sf::Vector2i getDestinationTile(){ return destination_tile; };
     inline void canMove(bool p_can = true){ can_move = p_can;};
+    inline sf::Vector2i getCurrentTile(){return current_tile;};
 private:
     sf::Vector2i current_tile;
     sf::Vector2i destination_tile;

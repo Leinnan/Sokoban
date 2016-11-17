@@ -48,7 +48,6 @@ namespace ar{
         tile_types.push_back(ice);
     }
     void Tilemap::generateMap() {
-        //TODO CONFIG ALL TILES
         //configTile(0,0,tile_types[0]);
         configTile(1,0,tile_types[0]);
         configTile(0,1,tile_types[0]);

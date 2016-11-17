@@ -26,6 +26,7 @@ namespace ar {
         void render();
 
         void generateBallsByPos(std::vector<sf::Vector2i>);
+        int getBallIndexInTile(sf::Vector2i);
 
         sf::Time frame_time;
 
