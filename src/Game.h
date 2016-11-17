@@ -4,7 +4,7 @@
 #include <SFML/Audio.hpp>
 #include <vector>
 #include "Player.h"
-#include "Ball.h"
+#include "Box.h"
 #include "Tilemap.h"
 // import game object classes
 
@@ -25,8 +25,8 @@ namespace ar {
         void update(sf::Time p_time_delta);
         void render();
 
-        void generateBallsByPos(std::vector<sf::Vector2i>);
-        int getBallIndexInTile(sf::Vector2i);
+        void generetaBoxesByPos(std::vector<sf::Vector2i>);
+        int getBoxByTileIndex(sf::Vector2i);
 
         sf::Time frame_time;
 
@@ -34,7 +34,7 @@ namespace ar {
         sf::Music bg_music;
         bool is_game_running;
         bool is_paused;
-        bool show_fps = true;
+        bool show_fps = false;
 
         // base font
         sf::Font basic_font;
@@ -46,9 +46,9 @@ namespace ar {
         ar::Tilemap tilemap;
         sf::Texture tilemap_texture;
         sf::Texture player_texture;
-        sf::Texture ball_texture;
+        sf::Texture box_texture;
         ar::Player player;
-        std::vector< ar::Ball > balls;
+        std::vector< ar::Box > boxes;
     };
 }
 #endif // GAME_H

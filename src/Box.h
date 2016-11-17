@@ -8,9 +8,9 @@
 #include <SFML/Graphics.hpp>
 #include "Object.h"
 namespace ar{
-    class Ball : public Object {
+    class Box : public Object {
     public:
-        Ball();
+        Box();
         virtual void update(sf::Time p_delta) override ;
         void setTilePosition(sf::Vector2i p_new_pos);
         void move(sf::Vector2i p_move_vector);

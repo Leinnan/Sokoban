@@ -88,7 +88,7 @@ namespace ar{
                             this->player_start = sf::Vector2i(index_x, index_y);
                         }
                         if(single_tile.symbol == BALL_SYMBOL){
-                            balls_pos.push_back(sf::Vector2i(index_x, index_y));
+                            boxes_pos.push_back(sf::Vector2i(index_x, index_y));
                         }
                     }
                 }
@@ -100,6 +100,22 @@ namespace ar{
     }
     bool Tilemap::isTilePassable(unsigned int p_x, unsigned int p_y) {
         unsigned int tile_index = 4*(p_y * TILES_X + p_x)+1;
+        float dist_x, dist_y;
+        for (auto &&tile : tile_types) {
+            dist_x = tile.tex_index.x*tile_length - map_graphic[tile_index].texCoords.x;
+            dist_y = tile.tex_index.y*tile_length - map_graphic[tile_index].texCoords.y;
+            dist_x = dist_x > 0 ? dist_x : dist_x * -1;
+            dist_y = dist_y > 0 ? dist_y : dist_y * -1;
+            if(dist_x < 0.1f && dist_y  < 0.1f){
+                return !tile.is_wall;
+            }
+        }
+
+        return false;
+
+    }
+    bool Tilemap::isTilePassable(sf::Vector2i p_tile_index) {
+        unsigned int tile_index = 4*(p_tile_index.y * TILES_X + p_tile_index.x)+1;
         float dist_x, dist_y;
         for (auto &&tile : tile_types) {
             dist_x = tile.tex_index.x*tile_length - map_graphic[tile_index].texCoords.x;

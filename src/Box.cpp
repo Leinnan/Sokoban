@@ -2,20 +2,20 @@
 // Created by piotr on 17.11.16.
 //
 
-#include "Ball.h"
+#include "Box.h"
 namespace ar{
 
-    Ball::Ball() {
+    Box::Box() {
         this->setSpriteColor(sf::Color::Yellow);
         setPosition(current_tile.x*tile_length,current_tile.y*tile_length);
     }
 
-    void Ball::move(sf::Vector2i p_move_vector) {
+    void Box::move(sf::Vector2i p_move_vector) {
         is_moving = true;
         destination_tile = current_tile + p_move_vector;
     }
 
-    void Ball::setTilePosition(sf::Vector2i p_new_pos) {
+    void Box::setTilePosition(sf::Vector2i p_new_pos) {
         current_tile = p_new_pos;
         destination_tile = p_new_pos;
         is_moving = false;
@@ -23,7 +23,7 @@ namespace ar{
 
     }
 
-    void Ball::update(sf::Time p_delta) {
+    void Box::update(sf::Time p_delta) {
         if(!is_moving) {
             setPosition(current_tile.x * tile_length, current_tile.y * tile_length);
             completion = 0.f;

@@ -32,14 +32,15 @@ namespace ar{
         inline void setTileMapTex(sf::Texture *p_texture_pointer){ this->texture_pointer = p_texture_pointer;};
         void draw(sf::RenderWindow *p_window_pointer);
         bool isTilePassable(unsigned int p_x, unsigned int p_y);
+        bool isTilePassable(sf::Vector2i p_tile_index);
         inline sf::Vector2i getPlayerStartPos(){ return player_start;};
-        inline std::vector< sf::Vector2i > getBallsByPos(){ return balls_pos;};
+        inline std::vector< sf::Vector2i > getBoxesByPos(){ return boxes_pos;};
     private:
         void configTile(unsigned int p_x, unsigned int p_y, TileType p_tile_type);
         void generateMap();
         void generateMap(std::string p_file_path);
         std::vector< ar::TileType > tile_types;
-        std::vector< sf::Vector2i > balls_pos;
+        std::vector< sf::Vector2i > boxes_pos;
         sf::Texture *texture_pointer;
         sf::VertexArray map_graphic;
         unsigned int tile_length = 30;

@@ -3,7 +3,7 @@
 namespace ar {
 
     Game::Game(sf::RenderWindow *p_window_pointer) :
-        tilemap("/home/piotr/Projekty/Sokoban/build/maps/1.txt") {
+        tilemap("maps/1.txt") {
         window_pointer = p_window_pointer;
         if(bg_music.openFromFile("./Sounds/bg_music.ogg")){
             bg_music.setVolume(33.f);
@@ -24,14 +24,14 @@ namespace ar {
         frame_time = sf::seconds(1.f / 60.f);
         tilemap_texture.loadFromFile("./gfx/tilemap_smaller.png");
         player_texture.loadFromFile("./gfx/player.png");
-        ball_texture.loadFromFile("./gfx/ball.png");
+        box_texture.loadFromFile("./gfx/box.png");
 
         tilemap.setTileMapTex(&tilemap_texture);
         player.setTexture(&player_texture);
 
         player.setTilePosition(tilemap.getPlayerStartPos());
 
-        this->generateBallsByPos(tilemap.getBallsByPos());
+        this->generetaBoxesByPos(tilemap.getBoxesByPos());
 
         this->run();
     }
@@ -44,22 +44,22 @@ namespace ar {
 
     }
 
-    void Game::generateBallsByPos(std::vector<sf::Vector2i> p_balls_pos) {
-        for (auto &&balls_pos : p_balls_pos) {
-            ar::Ball new_ball;
-            new_ball.setTilePosition(balls_pos);
-            new_ball.setTexture(&ball_texture);
-            balls.push_back(new_ball);
+    void Game::generetaBoxesByPos(std::vector<sf::Vector2i> p_boxes_pos) {
+        for (auto &&balls_pos : p_boxes_pos) {
+            ar::Box new_box;
+            new_box.setTilePosition(balls_pos);
+            new_box.setTexture(&box_texture);
+            boxes.push_back(new_box);
         }
     }
-    int Game::getBallIndexInTile(sf::Vector2i p_tile) {
+    int Game::getBoxByTileIndex(sf::Vector2i p_tile) {
         unsigned int index = 0;
-        for (auto &&ball : balls) {
-            if(ball.getCurrentTile() == p_tile)
+        for (auto &&box : boxes) {
+            if(box.getCurrentTile() == p_tile)
                 return index;
             index++;
         }
-        // if no Ball in this pos return -1
+        // if no Box in this pos return -1
         return -1;
     }
 
@@ -131,18 +131,25 @@ namespace ar {
             if(player.isMoving()){
                 std::clog << "PLAYER UPDATE " << player.getPosition().x << ", " << player.getPosition().y << "\n";
                 sf::Vector2i destination_index = player.getDestinationTile();
-                if(!tilemap.isTilePassable(destination_index.x,destination_index.y)){
+                if(!tilemap.isTilePassable(destination_index)){
                     player.canMove(false);
                 }
-                if(getBallIndexInTile(player.getDestinationTile()) != -1){
+                if(getBoxByTileIndex(player.getDestinationTile()) != -1){
+                    unsigned int ball_index = getBoxByTileIndex(player.getDestinationTile());
                     player.canMove(false);
-                    balls[getBallIndexInTile(player.getDestinationTile())].move(
+                    sf::Vector2i box_movement(
                             player.getDestinationTile() - player.getCurrentTile());
+
+                    if(tilemap.isTilePassable(player.getDestinationTile() + box_movement) &&
+                            getBoxByTileIndex(player.getDestinationTile() + box_movement) == -1){
+                        boxes[ball_index].move(box_movement);
+                        player.canMove(true);
+                    }
                 }
             }
             player.update(p_time_delta);
-            for (auto &&ball : balls) {
-                ball.update(p_time_delta);
+            for (auto &&box : boxes) {
+                box.update(p_time_delta);
             }
         }
     }
@@ -152,8 +159,8 @@ namespace ar {
         // here draw objects
         tilemap.draw(window_pointer);
         player.draw(window_pointer);
-        for (auto &&ball : balls) {
-            ball.draw(window_pointer);
+        for (auto &&box : boxes) {
+            box.draw(window_pointer);
         }
 
         //interface last
