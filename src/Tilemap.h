@@ -7,8 +7,9 @@
 
 #define TILES_X 15
 #define TILES_Y 15
-#define PLAYER_SYMBOL 'p'
-#define BALL_SYMBOL   'o'
+#define PLAYER_SYMBOL  'p'
+#define BALL_SYMBOL    'o'
+#define TARGET_SYMBOL   't'
 
 #include <SFML/Graphics.hpp>
 #include <vector>
@@ -34,16 +35,18 @@ namespace ar{
         bool isTilePassable(unsigned int p_x, unsigned int p_y);
         bool isTilePassable(sf::Vector2i p_tile_index);
         inline sf::Vector2i getPlayerStartPos(){ return player_start;};
-        inline std::vector< sf::Vector2i > getBoxesByPos(){ return boxes_pos;};
+        inline std::vector< sf::Vector2i > getBoxesStartPos(){ return boxes_pos;};
+        inline std::vector< sf::Vector2i > getTargetsStartPos(){ return targets_pos;};
     private:
         void configTile(unsigned int p_x, unsigned int p_y, TileType p_tile_type);
         void generateMap();
         void generateMap(std::string p_file_path);
         std::vector< ar::TileType > tile_types;
         std::vector< sf::Vector2i > boxes_pos;
+        std::vector< sf::Vector2i > targets_pos;
         sf::Texture *texture_pointer;
         sf::VertexArray map_graphic;
-        unsigned int tile_length = 30;
+        unsigned int tile_length = 40;
         sf::Vector2i player_start;
     };
 }

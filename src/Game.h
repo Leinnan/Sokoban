@@ -49,6 +49,7 @@ namespace ar {
         sf::Texture box_texture;
         ar::Player player;
         std::vector< ar::Box > boxes;
+        std::vector< sf::Vector2i > targets;
     };
 }
 #endif // GAME_H

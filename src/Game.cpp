@@ -22,7 +22,7 @@ namespace ar {
         is_game_running = true;
         is_paused = false;
         frame_time = sf::seconds(1.f / 60.f);
-        tilemap_texture.loadFromFile("./gfx/tilemap_smaller.png");
+        tilemap_texture.loadFromFile("./gfx/tilemap.png");
         player_texture.loadFromFile("./gfx/player.png");
         box_texture.loadFromFile("./gfx/box.png");
 
@@ -31,7 +31,10 @@ namespace ar {
 
         player.setTilePosition(tilemap.getPlayerStartPos());
 
-        this->generetaBoxesByPos(tilemap.getBoxesByPos());
+        this->generetaBoxesByPos(tilemap.getBoxesStartPos());
+        this->targets.resize(tilemap.getTargetsStartPos().size());
+        this->targets = tilemap.getTargetsStartPos();
+
 
         this->run();
     }
@@ -150,6 +153,12 @@ namespace ar {
             player.update(p_time_delta);
             for (auto &&box : boxes) {
                 box.update(p_time_delta);
+
+                box.isOnTarget(false);
+                for (auto &&target : targets) {
+                    if(box.getCurrentTile() == target)
+                        box.isOnTarget(true);
+                }
             }
         }
     }

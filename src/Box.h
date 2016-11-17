@@ -15,13 +15,16 @@ namespace ar{
         void setTilePosition(sf::Vector2i p_new_pos);
         void move(sf::Vector2i p_move_vector);
         inline sf::Vector2i getCurrentTile(){return current_tile;};
+        inline bool isOnTarget(){return is_on_target;};
+        inline void isOnTarget(bool p_on_target){ is_on_target = p_on_target;};
     private:
         sf::Vector2i current_tile;
         sf::Vector2i destination_tile;
         float speed = 2.3f;
         bool is_moving = false;
         bool can_move = true;
-        unsigned int tile_length = 30;
+        bool is_on_target = false;
+        unsigned int tile_length = 40;
         float completion = 0;
 
     };

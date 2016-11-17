@@ -33,7 +33,7 @@ private:
     float speed = 2.3f;
     bool is_moving = false;
     bool can_move = true;
-    unsigned int tile_length = 30;
+    unsigned int tile_length = 40;
     float completion = 0;
 };
 }

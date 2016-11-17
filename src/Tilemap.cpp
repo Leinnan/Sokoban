@@ -26,6 +26,9 @@ namespace ar{
         TileType balls_tile;
         balls_tile.tex_index = sf::Vector2i(0,1);
         balls_tile.symbol = BALL_SYMBOL;
+        TileType target_tile;
+        target_tile.tex_index = sf::Vector2i(2,1);
+        target_tile.symbol = TARGET_SYMBOL;
         TileType gleba;
         gleba.tex_index = sf::Vector2i(0,0);
         gleba.symbol = '.';
@@ -42,6 +45,7 @@ namespace ar{
 
         tile_types.push_back(player_pos);
         tile_types.push_back(balls_tile);
+        tile_types.push_back(target_tile);
         tile_types.push_back(gleba);
         tile_types.push_back(wall);
         tile_types.push_back(dirt);
@@ -89,6 +93,9 @@ namespace ar{
                         }
                         if(single_tile.symbol == BALL_SYMBOL){
                             boxes_pos.push_back(sf::Vector2i(index_x, index_y));
+                        }
+                        if(single_tile.symbol == TARGET_SYMBOL){
+                            targets_pos.push_back(sf::Vector2i(index_x, index_y));
                         }
                     }
                 }

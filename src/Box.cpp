@@ -50,5 +50,11 @@ namespace ar{
 
         }
 
+        if(is_on_target){
+            setSpriteColor(sf::Color::Green);
+        }
+        else{
+            setSpriteColor(sf::Color::White);
+        }
     }
 }

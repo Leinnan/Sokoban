@@ -23,7 +23,7 @@ namespace ar {
         // 1 = Gameplay
         // 0 = Intro
         unsigned int game_state = 0;
-		bool show_intro = false;
+		bool show_intro = true;
     };
 }
 #endif // ENGINE_H
