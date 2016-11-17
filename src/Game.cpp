@@ -28,6 +28,8 @@ namespace ar {
         tilemap.setTileMapTex(&tilemap_texture);
         player.setTexture(&player_texture);
 
+        player.setTilePosition(tilemap.getPlayerStartPos());
+
 
 
         this->run();

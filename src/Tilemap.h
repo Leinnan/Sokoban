@@ -7,6 +7,7 @@
 
 #define TILES_X 15
 #define TILES_Y 15
+#define PLAYER_SYMBOL 'p'
 
 #include <SFML/Graphics.hpp>
 #include <vector>
@@ -30,6 +31,7 @@ namespace ar{
         inline void setTileMapTex(sf::Texture *p_texture_pointer){ this->texture_pointer = p_texture_pointer;};
         void draw(sf::RenderWindow *p_window_pointer);
         bool isTilePassable(unsigned int p_x, unsigned int p_y);
+        inline sf::Vector2i getPlayerStartPos(){ return player_start;};
     private:
         void configTile(unsigned int p_x, unsigned int p_y, TileType p_tile_type);
         void generateMap();
@@ -38,6 +40,7 @@ namespace ar{
         sf::Texture *texture_pointer;
         sf::VertexArray map_graphic;
         unsigned int tile_length = 30;
+        sf::Vector2i player_start;
     };
 }
 

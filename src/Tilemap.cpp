@@ -6,18 +6,23 @@
 
 namespace ar{
     Tilemap::Tilemap() :
-        map_graphic(sf::Quads, TILES_X*TILES_Y*4)
+        map_graphic(sf::Quads, TILES_X*TILES_Y*4),
+        player_start(6,3)
     {
         generateTileTypes();
         generateMap();
     }
     Tilemap::Tilemap(std::string p_file_path) :
-        map_graphic(sf::Quads, TILES_X*TILES_Y*4)
+        map_graphic(sf::Quads, TILES_X*TILES_Y*4),
+        player_start(6,3)
     {
         generateTileTypes();
         generateMap(p_file_path);
     }
     void Tilemap::generateTileTypes() {
+        TileType player_pos;
+        player_pos.tex_index = sf::Vector2i(0,1);
+        player_pos.symbol = PLAYER_SYMBOL;
         TileType gleba;
         gleba.tex_index = sf::Vector2i(0,0);
         gleba.symbol = '.';
@@ -32,6 +37,7 @@ namespace ar{
         ice.tex_index = sf::Vector2i(1,0);
         ice.symbol = 'i';
 
+        tile_types.push_back(player_pos);
         tile_types.push_back(gleba);
         tile_types.push_back(wall);
         tile_types.push_back(dirt);
@@ -72,8 +78,13 @@ namespace ar{
                 tile_symbol = one_line[index_x];
 
                 for(auto const& single_tile: tile_types) {
-                    if(single_tile.symbol == tile_symbol)
+
+                    if(single_tile.symbol == tile_symbol){
                         this->configTile(index_x,index_y,single_tile);
+                        if(single_tile.symbol == PLAYER_SYMBOL){
+                            this->player_start = sf::Vector2i(index_x, index_y);
+                        }
+                    }
                 }
 
             }

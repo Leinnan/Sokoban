@@ -8,8 +8,6 @@ namespace ar{
 
     Player::Player() {
         this->setSpriteColor(sf::Color::White);
-        current_tile.x = 6;
-        current_tile.y = 3;
         setPosition(current_tile.x*tile_length,current_tile.y*tile_length);
     }
     void Player::move(unsigned int direction) {
@@ -63,4 +61,11 @@ namespace ar{
 
     }
 
+    void Player::setTilePosition(sf::Vector2i p_new_pos) {
+        current_tile = p_new_pos;
+        destination_tile = p_new_pos;
+        is_moving = false;
+        setPosition(p_new_pos.x*tile_length,p_new_pos.y*tile_length);
+
+    }
 }
