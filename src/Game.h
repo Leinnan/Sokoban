@@ -3,7 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <vector>
-#include "Object.h"
+#include "Player.h"
 #include "Tilemap.h"
 // import game object classes
 
@@ -43,6 +43,8 @@ namespace ar {
         // game objects
         ar::Tilemap tilemap;
         sf::Texture tilemap_texture;
+        sf::Texture player_texture;
+        ar::Player player;
     };
 }
 #endif // GAME_H

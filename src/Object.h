@@ -31,6 +31,8 @@ namespace ar {
 
         void move(sf::Vector2f p_position);
 
+        inline void setSpriteColor(sf::Color p_color){ sprite.setColor(p_color);};
+
     private:
         sf::Sprite sprite;
         sf::Vector2f position;

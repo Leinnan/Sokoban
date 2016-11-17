@@ -32,7 +32,7 @@ set (CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic")
 
 # Define sources and executable
 set(EXECUTABLE_NAME ${PROJECT_NAME})
-add_executable(${EXECUTABLE_NAME} ${SOURCES} main.cpp src/Tilemap.cpp src/Tilemap.h)
+add_executable(${EXECUTABLE_NAME} ${SOURCES} main.cpp src/Tilemap.cpp src/Tilemap.h src/Player.cpp src/Player.h)
 
 set(CMAKE_MODULE_PATH "/usr/share/cmake-3.6/Modules")
 
