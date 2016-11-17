@@ -50,13 +50,17 @@ namespace ar {
             if(!player.isMoving()){
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
                     player.move(M_LEFT);
-                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
                     player.move(M_UP);
-                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
                     player.move(M_RIGHT);
-                else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
                     player.move(M_DOWN);
+
+
+
             }
+
 
             switch (event.key.code) {
                 case sf::Keyboard::Escape:
@@ -104,7 +108,14 @@ namespace ar {
 
     void Game::update(sf::Time p_time_delta) {
         if (!is_paused) {
-            std::cout << "PLAYER UPDATE " << player.getPosition().x << ", " << player.getPosition().y << "\n";
+            if(player.isMoving())
+                std::clog << "PLAYER UPDATE " << player.getPosition().x << ", " << player.getPosition().y << "\n";
+            if(player.isMoving()){
+                sf::Vector2i destination_index = player.getDestinationTile();
+                if(!tilemap.isTilePassable(destination_index.x,destination_index.y)){
+                    player.canMove(false);
+                }
+            }
             player.update(p_time_delta);
         }
     }

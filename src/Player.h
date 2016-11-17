@@ -22,12 +22,14 @@ public:
     void setDestinationTile(uint8_t p_x, uint8_t p_y, unsigned int p_tile_length);
     inline bool isMoving(){return is_moving;};
     void move(unsigned int direction);
+    inline sf::Vector2i getDestinationTile(){ return destination_tile; };
+    inline void canMove(bool p_can = true){ can_move = p_can;};
 private:
-    sf::Vector2f destination;
     sf::Vector2i current_tile;
     sf::Vector2i destination_tile;
-    unsigned int speed = 1;
+    float speed = 2.3f;
     bool is_moving = false;
+    bool can_move = true;
     unsigned int tile_length = 30;
     float completion = 0;
 };

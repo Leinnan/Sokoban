@@ -81,6 +81,22 @@ namespace ar{
         }
 
     }
+    bool Tilemap::isTilePassable(unsigned int p_x, unsigned int p_y) {
+        unsigned int tile_index = 4*(p_y * TILES_X + p_x)+1;
+        float dist_x, dist_y;
+        for (auto &&tile : tile_types) {
+            dist_x = tile.tex_index.x*tile_length - map_graphic[tile_index].texCoords.x;
+            dist_y = tile.tex_index.y*tile_length - map_graphic[tile_index].texCoords.y;
+            dist_x = dist_x > 0 ? dist_x : dist_x * -1;
+            dist_y = dist_y > 0 ? dist_y : dist_y * -1;
+            if(dist_x < 0.1f && dist_y  < 0.1f){
+                return !tile.is_wall;
+            }
+        }
+
+        return false;
+
+    }
 
     void Tilemap::configTile(unsigned int p_x, unsigned int p_y, TileType p_tile_type){
         unsigned int start_index = 4*(p_y * TILES_X + p_x);

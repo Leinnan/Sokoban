@@ -29,6 +29,7 @@ namespace ar{
         void generateTileTypes();//TODO version with config file
         inline void setTileMapTex(sf::Texture *p_texture_pointer){ this->texture_pointer = p_texture_pointer;};
         void draw(sf::RenderWindow *p_window_pointer);
+        bool isTilePassable(unsigned int p_x, unsigned int p_y);
     private:
         void configTile(unsigned int p_x, unsigned int p_y, TileType p_tile_type);
         void generateMap();
