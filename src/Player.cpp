@@ -32,6 +32,10 @@ namespace ar{
         }
 
     }
+    void Player::move(sf::Vector2i p_move_vector) {
+        is_moving = true;
+        destination_tile = current_tile + p_move_vector;
+    }
     void Player::update(sf::Time p_delta) {
         if(!is_moving) {
             setPosition(current_tile.x * tile_length, current_tile.y * tile_length);

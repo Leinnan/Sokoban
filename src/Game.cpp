@@ -134,10 +134,16 @@ namespace ar {
                 if(!tilemap.isTilePassable(destination_index.x,destination_index.y)){
                     player.canMove(false);
                 }
-                if(getBallIndexInTile(player.getDestinationTile()) != -1)
+                if(getBallIndexInTile(player.getDestinationTile()) != -1){
                     player.canMove(false);
+                    balls[getBallIndexInTile(player.getDestinationTile())].move(
+                            player.getDestinationTile() - player.getCurrentTile());
+                }
             }
             player.update(p_time_delta);
+            for (auto &&ball : balls) {
+                ball.update(p_time_delta);
+            }
         }
     }
 

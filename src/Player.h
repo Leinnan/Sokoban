@@ -22,6 +22,7 @@ public:
     void setDestinationTile(uint8_t p_x, uint8_t p_y, unsigned int p_tile_length);
     inline bool isMoving(){return is_moving;};
     void move(unsigned int direction);
+    void move(sf::Vector2i p_move_vector);
     void setTilePosition(sf::Vector2i p_new_pos);
     inline sf::Vector2i getDestinationTile(){ return destination_tile; };
     inline void canMove(bool p_can = true){ can_move = p_can;};

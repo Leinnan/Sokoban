@@ -11,7 +11,9 @@ namespace ar{
     class Ball : public Object {
     public:
         Ball();
+        virtual void update(sf::Time p_delta) override ;
         void setTilePosition(sf::Vector2i p_new_pos);
+        void move(sf::Vector2i p_move_vector);
         inline sf::Vector2i getCurrentTile(){return current_tile;};
     private:
         sf::Vector2i current_tile;
