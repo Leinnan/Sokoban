@@ -24,13 +24,14 @@ namespace ar {
         frame_time = sf::seconds(1.f / 60.f);
         tilemap_texture.loadFromFile("./gfx/tilemap_smaller.png");
         player_texture.loadFromFile("./gfx/player.png");
+        ball_texture.loadFromFile("./gfx/ball.png");
 
         tilemap.setTileMapTex(&tilemap_texture);
         player.setTexture(&player_texture);
 
         player.setTilePosition(tilemap.getPlayerStartPos());
 
-
+        this->generateBallsByPos(tilemap.getBallsByPos());
 
         this->run();
     }
@@ -42,6 +43,16 @@ namespace ar {
         }
 
     }
+
+    void Game::generateBallsByPos(std::vector<sf::Vector2i> p_balls_pos) {
+        for (auto &&balls_pos : p_balls_pos) {
+            ar::Ball new_ball;
+            new_ball.setTilePosition(balls_pos);
+            new_ball.setTexture(&ball_texture);
+            balls.push_back(new_ball);
+        }
+    }
+
 
     void Game::handleEvents() {
         sf::Event event;
@@ -127,6 +138,9 @@ namespace ar {
         // here draw objects
         tilemap.draw(window_pointer);
         player.draw(window_pointer);
+        for (auto &&ball : balls) {
+            ball.draw(window_pointer);
+        }
 
         //interface last
         if(show_fps){

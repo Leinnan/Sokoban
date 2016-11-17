@@ -4,6 +4,7 @@
 #include <SFML/Audio.hpp>
 #include <vector>
 #include "Player.h"
+#include "Ball.h"
 #include "Tilemap.h"
 // import game object classes
 
@@ -21,10 +22,10 @@ namespace ar {
     protected:
     private:
         void handleEvents();
-
         void update(sf::Time p_time_delta);
-
         void render();
+
+        void generateBallsByPos(std::vector<sf::Vector2i>);
 
         sf::Time frame_time;
 
@@ -44,7 +45,9 @@ namespace ar {
         ar::Tilemap tilemap;
         sf::Texture tilemap_texture;
         sf::Texture player_texture;
+        sf::Texture ball_texture;
         ar::Player player;
+        std::vector< ar::Ball > balls;
     };
 }
 #endif // GAME_H
