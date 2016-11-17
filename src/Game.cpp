@@ -32,7 +32,7 @@ namespace ar {
         player.setTilePosition(tilemap.getPlayerStartPos());
 
         this->generetaBoxesByPos(tilemap.getBoxesStartPos());
-        this->targets.resize(tilemap.getTargetsStartPos().size());
+
         this->targets = tilemap.getTargetsStartPos();
 
 

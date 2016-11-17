@@ -32,12 +32,12 @@ set (CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic")
 
 # Define sources and executable
 set(EXECUTABLE_NAME ${PROJECT_NAME})
-add_executable(${EXECUTABLE_NAME} ${SOURCES} main.cpp src/Tilemap.cpp src/Tilemap.h src/Player.cpp src/Player.h src/Box.cpp src/Box.h)
+add_executable(${EXECUTABLE_NAME} ${SOURCES} main.cpp)
 
 set(CMAKE_MODULE_PATH "/usr/share/cmake-3.6/Modules")
 
 # Detect and add SFML
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
+##set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 #Find any version 2.X of SFML
 #See the FindSFML.cmake file for additional details and instructions
 find_package(SFML 2 REQUIRED system window graphics network audio)
