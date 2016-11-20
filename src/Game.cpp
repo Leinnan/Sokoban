@@ -3,7 +3,7 @@
 namespace ar {
 
     Game::Game(sf::RenderWindow *p_window_pointer) :
-        tilemap("maps/1.txt") {
+        tilemap("maps/1.txt"){
         window_pointer = p_window_pointer;
         if(bg_music.openFromFile("./Sounds/bg_music.ogg")){
             bg_music.setVolume(33.f);
@@ -18,6 +18,18 @@ namespace ar {
         fps_text.setOutlineThickness(2.2f);
         fps_text.setCharacterSize(15);
         fps_text.setPosition(sf::Vector2f(5.f,5.f));
+			
+		level_complete_bg.setFillColor(sf::Color(49,179,44,120));
+		level_complete_bg.setSize(sf::Vector2f(2222, 2222));
+		level_complete_bg.setPosition(sf::Vector2f(0, 0));
+			
+		level_complete_label.setFont(basic_font);
+        level_complete_label.setOutlineColor(sf::Color::Black);
+        level_complete_label.setFillColor(sf::Color::White);
+        level_complete_label.setOutlineThickness(1.f);
+        level_complete_label.setCharacterSize(25);
+        level_complete_label.setPosition(sf::Vector2f(300.f,5.f));
+		level_complete_label.setString("YOU WIN!");
 
         is_game_running = true;
         is_paused = false;
@@ -130,7 +142,7 @@ namespace ar {
     }
 
     void Game::update(sf::Time p_time_delta) {
-        if (!is_paused) {
+        if (!is_paused && !level_complete) {
             if(player.isMoving()){
                 std::clog << "PLAYER UPDATE " << player.getPosition().x << ", " << player.getPosition().y << "\n";
                 sf::Vector2i destination_index = player.getDestinationTile();
@@ -151,20 +163,28 @@ namespace ar {
                 }
             }
             player.update(p_time_delta);
+			
+			int box_amount_on_targets = 0;
+			
             for (auto &&box : boxes) {
                 box.update(p_time_delta);
 
                 box.isOnTarget(false);
                 for (auto &&target : targets) {
-                    if(box.getCurrentTile() == target)
+                    if(box.getCurrentTile() == target){
+						box_amount_on_targets++;
                         box.isOnTarget(true);
+					}
                 }
             }
+			if(box_amount_on_targets == boxes.size()){
+			   level_complete = true;
+			}
         }
     }
 
     void Game::render() {
-        window_pointer->clear(sf::Color(75, 203, 208));
+        window_pointer->clear(sf::Color(88, 99, 116));
         // here draw objects
         tilemap.draw(window_pointer);
         player.draw(window_pointer);
@@ -176,6 +196,11 @@ namespace ar {
         if(show_fps){
             window_pointer->draw(fps_text);
         }
+		//after win
+		if(level_complete){
+			window_pointer->draw(level_complete_bg);
+			window_pointer->draw(level_complete_label);
+		}
         window_pointer->display();
 
     }

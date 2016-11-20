@@ -20,7 +20,7 @@ namespace ar{
     private:
         sf::Vector2i current_tile;
         sf::Vector2i destination_tile;
-        float speed = 2.3f;
+        float speed = 2.7f;
         bool is_moving = false;
         bool can_move = true;
         bool is_on_target = false;

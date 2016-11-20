@@ -35,6 +35,7 @@ namespace ar {
         bool is_game_running;
         bool is_paused;
         bool show_fps = false;
+		bool level_complete = false;
 
         // base font
         sf::Font basic_font;
@@ -50,6 +51,10 @@ namespace ar {
         ar::Player player;
         std::vector< ar::Box > boxes;
         std::vector< sf::Vector2i > targets;
+		
+		//level complete screen
+		sf::RectangleShape level_complete_bg;
+		sf::Text level_complete_label;
     };
 }
 #endif // GAME_H
