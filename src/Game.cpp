@@ -5,7 +5,7 @@ namespace ar {
     Game::Game(sf::RenderWindow *p_window_pointer) :
         tilemap("maps/1.txt"){
         window_pointer = p_window_pointer;
-        if(bg_music.openFromFile("./Sounds/bg_music.ogg")){
+        if(bg_music.openFromFile("./sfx/bg_music.ogg")){
             bg_music.setVolume(33.f);
             bg_music.setLoop(true);
         }
