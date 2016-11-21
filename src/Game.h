@@ -31,6 +31,7 @@ namespace ar {
         sf::Time frame_time;
 
         sf::RenderWindow *window_pointer;
+		sf::View game_view;
         sf::Music bg_music;
         bool is_game_running;
         bool is_paused;
@@ -51,6 +52,7 @@ namespace ar {
         ar::Player player;
         std::vector< ar::Box > boxes;
         std::vector< sf::Vector2i > targets;
+		unsigned int box_amount_on_targets = 0;
 		
 		//level complete screen
 		sf::RectangleShape level_complete_bg;

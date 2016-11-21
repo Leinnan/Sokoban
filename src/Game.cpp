@@ -5,6 +5,9 @@ namespace ar {
     Game::Game(sf::RenderWindow *p_window_pointer) :
         tilemap("maps/1.txt"){
         window_pointer = p_window_pointer;
+		game_view.setSize(sf::Vector2f(800.f, 600.f));
+		game_view.setCenter(sf::Vector2f(340.f, 280.f));
+		window_pointer->setView(game_view);
         if(bg_music.openFromFile("./sfx/bg_music.ogg")){
             bg_music.setVolume(33.f);
             bg_music.setLoop(true);
@@ -164,7 +167,7 @@ namespace ar {
             }
             player.update(p_time_delta);
 			
-			int box_amount_on_targets = 0;
+			box_amount_on_targets = 0;
 			
             for (auto &&box : boxes) {
                 box.update(p_time_delta);
@@ -184,7 +187,10 @@ namespace ar {
     }
 
     void Game::render() {
-        window_pointer->clear(sf::Color(88, 99, 116));
+		if(level_complete)
+        	window_pointer->clear(sf::Color(49,179,44));
+		else
+        	window_pointer->clear(sf::Color(88, 99, 116));
         // here draw objects
         tilemap.draw(window_pointer);
         player.draw(window_pointer);
