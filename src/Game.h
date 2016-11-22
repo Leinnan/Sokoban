@@ -28,7 +28,9 @@ namespace ar {
         void generetaBoxesByPos(std::vector<sf::Vector2i>);
         int getBoxByTileIndex(sf::Vector2i);
 
-        void changeMap(std::string p_map_path);
+        void setMap(std::string p_map_path);
+        bool loadNextMap();
+        void reloadCurrentMap();
 
         sf::Time frame_time;
 
@@ -39,6 +41,8 @@ namespace ar {
         bool is_paused;
         bool show_fps = false;
 		bool level_complete = false;
+        bool game_end = false;
+
 
         // base font
         sf::Font basic_font;
@@ -54,6 +58,8 @@ namespace ar {
         ar::Player player;
         std::vector< ar::Box > boxes;
         std::vector< sf::Vector2i > targets;
+        std::vector< std::string > map_paths;
+        unsigned int current_map_index = 0;
 		unsigned int box_amount_on_targets = 0;
 		
 		//level complete screen

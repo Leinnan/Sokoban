@@ -32,7 +32,7 @@ namespace ar {
         level_complete_label.setOutlineThickness(1.f);
         level_complete_label.setCharacterSize(25);
         level_complete_label.setPosition(sf::Vector2f(300.f,5.f));
-		level_complete_label.setString("YOU WIN!");
+		level_complete_label.setString("YOU WIN!\n Press Enter");
 
         is_game_running = true;
         is_paused = false;
@@ -50,6 +50,10 @@ namespace ar {
 
         this->targets = tilemap.getTargetsStartPos();
 
+        map_paths.push_back("maps/1.txt");
+        map_paths.push_back("maps/2.txt");
+        map_paths.push_back("maps/3.txt");
+
 
         this->run();
     }
@@ -62,14 +66,29 @@ namespace ar {
 
     }
 
-    void Game::changeMap(std::string p_map_path){
+    void Game::setMap(std::string p_map_path){
         ar::Tilemap new_tilemap(p_map_path);
         tilemap = new_tilemap;
         tilemap.setTileMapTex(&tilemap_texture);
         this->targets = tilemap.getTargetsStartPos();
         this->generetaBoxesByPos(tilemap.getBoxesStartPos());
         player.setTilePosition(tilemap.getPlayerStartPos());
+        level_complete = false;
 
+    }
+
+    bool Game::loadNextMap(){
+        current_map_index++;
+        if(current_map_index > map_paths.size()-1)
+            return false;
+        else{
+            setMap(map_paths[current_map_index]);
+            return true;
+        }
+
+    }
+    void Game::reloadCurrentMap(){
+        setMap(map_paths[current_map_index]);
     }
 
     void Game::generetaBoxesByPos(std::vector<sf::Vector2i> p_boxes_pos) {
@@ -111,6 +130,10 @@ namespace ar {
                     player.move(M_DOWN);
             }
 
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Return) && level_complete)
+                if(!loadNextMap())
+                    is_game_running = false;
+
 
             switch (event.key.code) {
                 case sf::Keyboard::Escape:
@@ -119,7 +142,7 @@ namespace ar {
                     window_pointer->close();
                     break;
                 case sf::Keyboard::R:
-                    is_game_running = false;
+                    reloadCurrentMap();
                     break;
                 case sf::Keyboard::P:
                     is_paused = true;
@@ -195,6 +218,12 @@ namespace ar {
 			if(box_amount_on_targets == boxes.size()){
 			   level_complete = true;
 			}
+        }
+        else{
+            if(current_map_index+1 == map_paths.size()){
+                level_complete_label.setString("THE END!\n CONGRATULATIONS!");
+                game_end = true;
+            }
         }
     }
 
