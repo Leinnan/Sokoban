@@ -28,6 +28,8 @@ namespace ar {
         void generetaBoxesByPos(std::vector<sf::Vector2i>);
         int getBoxByTileIndex(sf::Vector2i);
 
+        void changeMap(std::string p_map_path);
+
         sf::Time frame_time;
 
         sf::RenderWindow *window_pointer;

@@ -62,13 +62,25 @@ namespace ar {
 
     }
 
+    void Game::changeMap(std::string p_map_path){
+        ar::Tilemap new_tilemap(p_map_path);
+        tilemap = new_tilemap;
+        tilemap.setTileMapTex(&tilemap_texture);
+        this->targets = tilemap.getTargetsStartPos();
+        this->generetaBoxesByPos(tilemap.getBoxesStartPos());
+        player.setTilePosition(tilemap.getPlayerStartPos());
+
+    }
+
     void Game::generetaBoxesByPos(std::vector<sf::Vector2i> p_boxes_pos) {
+        std::vector< ar::Box > new_boxes;
         for (auto &&balls_pos : p_boxes_pos) {
             ar::Box new_box;
             new_box.setTilePosition(balls_pos);
             new_box.setTexture(&box_texture);
-            boxes.push_back(new_box);
+            new_boxes.push_back(new_box);
         }
+        boxes = new_boxes;
     }
     int Game::getBoxByTileIndex(sf::Vector2i p_tile) {
         unsigned int index = 0;
