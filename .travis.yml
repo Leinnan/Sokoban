@@ -7,9 +7,9 @@ addons:
             - george-edison55-precise-backports
         packages:
             - g++-6
-            - libsfml-dev
             - cmake
             - cmake-data
+            - libsfml-dev
 
 script:
     - mkdir -p bin
