@@ -7,9 +7,21 @@ before_install:
     cmake . && make
     sudo make install
     cd ..
-
+addons:
+    apt:
+      sources:
+        - george-edison55-precise-backports
+        - ubuntu-toolchain-r-test
+      packages:
+        - gcc-6
+        - gfortran-6
+        - g++-6
+        - binutils
+        - cmake-data
+        - cmake
 script:
     - mkdir -p bin
     - cd bin
     - cmake ..
     - make
+
