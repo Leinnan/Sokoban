@@ -1,0 +1,18 @@
+language: c++
+
+addons:
+    apt:
+        sources:
+            - ubuntu-toolchain-r-test
+            - george-edison55-precise-backports
+        packages:
+            - g++-6
+            - libsfml-dev
+            - cmake
+            - cmake-data
+
+script:
+    - mkdir -p bin
+    - cd bin
+    - cmake ..
+    - make
