@@ -1,15 +1,13 @@
 language: c++
 
-addons:
-    apt:
-        sources:
-            - ubuntu-toolchain-r-test
-            - george-edison55-precise-backports
-        packages:
-            - g++-6
-            - cmake
-            - cmake-data
-            - libsfml-dev
+before_install:
+  - sudo apt-get install -qy build-essential cmake git libx11-dev freeglut3-dev libxcb-image0-dev libudev-dev libjpeg8-dev libopenal-dev libsndfile1-dev libfreetype6-dev
+  - |
+    curl -L "https://github.com/SFML/SFML/archive/$SFML.tar.gz" | tar -xz
+    cd SFML*
+    cmake . && make
+    sudo make install
+    cd ..
 
 script:
     - mkdir -p bin
