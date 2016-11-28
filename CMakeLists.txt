@@ -34,7 +34,7 @@ set (CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic")
 set(EXECUTABLE_NAME ${PROJECT_NAME})
 add_executable(${EXECUTABLE_NAME} ${SOURCES} main.cpp)
 
-set(CMAKE_MODULE_PATH "/usr/share/cmake-3.6/Modules" "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
+set(CMAKE_MODULE_PATH "/usr/share/cmake-3.6/Modules" "${PROJECT_SOURCE_DIR}/SFML-2.4.0/cmake/Modules" "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 
 # Detect and add SFML
 ##set(CMAKE_MODULE_PATH})
