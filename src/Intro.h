@@ -17,7 +17,7 @@ private:
     sf::RenderWindow * window_pointer;
     sf::Texture logo_texture;
     sf::Sprite logo_sprite;
-    bool is_logo_displaying = false;
+    bool is_logo_displaying;
 };
 
 #endif // INTRO_H

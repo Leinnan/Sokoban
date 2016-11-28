@@ -1,6 +1,7 @@
 #include "Intro.h"
 
-Intro::Intro(sf::RenderWindow * p_window_pointer)
+Intro::Intro(sf::RenderWindow * p_window_pointer) :
+is_logo_displaying(true)
 {
     this->window_pointer = p_window_pointer;
     // load texture and set to sprite
