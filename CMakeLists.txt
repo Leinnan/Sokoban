@@ -32,7 +32,7 @@ set (CMAKE_CXX_FLAGS "-Wall -Wextra -pedantic")
 
 # Define sources and executable
 set(EXECUTABLE_NAME ${PROJECT_NAME})
-add_executable(${EXECUTABLE_NAME} ${SOURCES} main.cpp src/Menu.cpp src/Menu.h)
+add_executable(${EXECUTABLE_NAME} ${SOURCES} main.cpp src/Menu.cpp src/Menu.h src/StartMenu.cpp src/StartMenu.h)
 
 set(CMAKE_MODULE_PATH "/usr/share/cmake-3.6/Modules")
 

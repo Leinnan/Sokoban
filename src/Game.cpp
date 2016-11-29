@@ -139,7 +139,6 @@ namespace ar {
                 case sf::Keyboard::Escape:
                     is_game_running = false;
                     bg_music.stop();
-                    window_pointer->close();
                     break;
                 case sf::Keyboard::R:
                     reloadCurrentMap();
