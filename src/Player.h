@@ -5,15 +5,17 @@
 #ifndef SFML_SOKOBAN_PLAYER_H
 #define SFML_SOKOBAN_PLAYER_H
 
+#include <SFML/Graphics.hpp>
+#include <iostream>
+#include "Object.h"
+#include "Arkona/Arkona.h"
+
 #define M_UP    0
 #define M_RIGHT 1
 #define M_DOWN  2
 #define M_LEFT  3
 
 
-#include <SFML/Graphics.hpp>
-#include "Object.h"
-#include "Arkona/Arkona.h"
 namespace ar{
 
 class Player : public Object {

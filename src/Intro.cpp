@@ -45,7 +45,7 @@ void Intro::run()
             elapsed_time_since_update -= frame_time;
             this->draw();
             this->handleEvents();
-            this->updateLogoScale(total_elapsed_time / intro_length);
+            this->updateLogoScale(ar::cubicEaseInOut(total_elapsed_time / intro_length));
             if(intro_length < total_elapsed_time){
                 is_logo_displaying = false;
             }

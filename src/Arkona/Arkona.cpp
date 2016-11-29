@@ -79,18 +79,9 @@ bool ar::isCollisionBetweenPointAndRectangle(sf::Vector2f point, sf::RectangleSh
 }
 
 
-float ar::cubicEaseInOut(float t, float b, float c, float d){
-    if (t==0)
-        return b;
-    if (t==d)
-        return b+=c;
-    if ((t/=d/2) < 1)
-        return c/2 * pow(3, 10 * (t - 1)) + b;
-
-    return c/2 * pow(3, 1-(10 * --t)) + b;
-}
-
-
 float ar::cubicEaseInOut(float t){
-    return cubicEaseInOut(t,0.0f,1.0f,1.0f);
+    if(t <= 0.5f)
+        return 2.0f * pow(t,2.0f);
+    t -= 0.5f;
+    return 2.0f * t * (1.0f - t) + 0.5;
 }

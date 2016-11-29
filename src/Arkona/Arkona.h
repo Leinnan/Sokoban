@@ -50,11 +50,7 @@ namespace ar{
 
     bool isCollisionBetweenPointAndRectangle(sf::Vector2f point, sf::RectangleShape rectangle);
 	
-	//t: start time
-	//b: starting value being interpolated
-	//c: change in value
-	//d: duration
-	float cubicEaseInOut(float t, float b, float c, float d);
+	//credits for http://stackoverflow.com/users/1842511/creak
 	float cubicEaseInOut(float t);
 	
 }
