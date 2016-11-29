@@ -51,7 +51,7 @@ namespace ar{
             if(completion <= 1){
                 sf::Vector2f current_position(current_tile.x*tile_length,current_tile.y*tile_length);
                 sf::Vector2f destination(destination_tile.x*tile_length,destination_tile.y*tile_length);
-                current_position += (destination - current_position) * completion;
+                current_position += (destination - current_position) * ar::cubicEaseInOut(completion);
                 setPosition(current_position);
             }
             else{
