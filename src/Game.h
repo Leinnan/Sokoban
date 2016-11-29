@@ -17,7 +17,7 @@ namespace ar {
 
         virtual ~Game();
 
-        void run();
+        void run(unsigned int p_level_nr = 0);
 
     protected:
     private:
@@ -29,6 +29,7 @@ namespace ar {
         int getBoxByTileIndex(sf::Vector2i);
 
         void setMap(std::string p_map_path);
+        void setMap(unsigned int p_map_nr);
         bool loadNextMap();
         void reloadCurrentMap();
 
