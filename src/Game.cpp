@@ -44,18 +44,11 @@ namespace ar {
         tilemap.setTileMapTex(&tilemap_texture);
         player.setTexture(&player_texture);
 
-        player.setTilePosition(tilemap.getPlayerStartPos());
-
-        this->generetaBoxesByPos(tilemap.getBoxesStartPos());
-
-        this->targets = tilemap.getTargetsStartPos();
-
         map_paths.push_back("maps/1.txt");
         map_paths.push_back("maps/2.txt");
         map_paths.push_back("maps/3.txt");
 
 
-        this->run();
     }
 
     Game::~Game() {
@@ -87,6 +80,11 @@ namespace ar {
         }
 
     }
+
+    void Game::setMap(unsigned int p_map_nr){
+        setMap(map_paths[p_map_nr]);
+    }
+
     void Game::reloadCurrentMap(){
         setMap(map_paths[current_map_index]);
     }
@@ -139,7 +137,6 @@ namespace ar {
                 case sf::Keyboard::Escape:
                     is_game_running = false;
                     bg_music.stop();
-                    window_pointer->close();
                     break;
                 case sf::Keyboard::R:
                     reloadCurrentMap();
@@ -154,9 +151,10 @@ namespace ar {
     }
 
 
-    void Game::run() {
+    void Game::run(unsigned int p_level_nr) {
         bg_music.play();
 
+        this->setMap(p_level_nr);
 
         sf::Clock delta_clock;
         sf::Time delta_time;
@@ -182,7 +180,7 @@ namespace ar {
     void Game::update(sf::Time p_time_delta) {
         if (!is_paused && !level_complete) {
             if(player.isMoving()){
-                std::clog << "PLAYER UPDATE " << player.getPosition().x << ", " << player.getPosition().y << "\n";
+                //std::clog << "PLAYER UPDATE " << player.getPosition().x << ", " << player.getPosition().y << "\n";
                 sf::Vector2i destination_index = player.getDestinationTile();
                 if(!tilemap.isTilePassable(destination_index)){
                     player.canMove(false);

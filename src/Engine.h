@@ -4,8 +4,10 @@
 #define DEFAULT_GAME_STATE 1
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include "Game.h"
 #include "Intro.h"
+#include "StartMenu.h"
 
 namespace ar {
     class Engine {
@@ -22,6 +24,7 @@ namespace ar {
         sf::RenderWindow window;
         // 1 = Gameplay
         // 0 = Intro
+        // 2 = Start menu
         unsigned int game_state = 0;
 		bool show_intro = true;
     };

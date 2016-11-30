@@ -67,19 +67,19 @@ namespace ar{
         std::string one_line;
         char tile_symbol;
         unsigned int index_x = 0, index_y = 0;
-        std::clog << "START\n";
+        //std::clog << "START\n";
         if(!map_file.good()){
             std::cerr << "Map file error\n";
             return;
         }
 
-        std::clog << "File open\n";
+        //std::clog << "File open\n";
         while(std::getline(map_file, one_line)) {
 
             if(index_y >= TILES_Y)
                 break;
 
-            std::clog << "Next line\n";
+            //std::clog << "Next line\n";
 
             for(index_x = 0; index_x < TILES_X;index_x++){
                 tile_symbol = one_line[index_x];
@@ -103,6 +103,7 @@ namespace ar{
             }
             index_y++;
         }
+		std::clog << "Map file loaded\n";
 
     }
     bool Tilemap::isTilePassable(unsigned int p_x, unsigned int p_y) {
@@ -145,11 +146,11 @@ namespace ar{
         map_graphic[start_index].position = sf::Vector2f(p_x * tile_length+tile_length, p_y * tile_length);
         map_graphic[start_index+3].position = sf::Vector2f(p_x * tile_length+tile_length, p_y * tile_length+tile_length);
 
-        std::clog << TILES_X << "\t START INDEX: " << start_index << "\n";
-        std::clog << map_graphic[start_index+1].position.x << "," << map_graphic[start_index+1].position.y << "\t"
+        //std::clog << TILES_X << "\t START INDEX: " << start_index << "\n";
+        /*std::clog << map_graphic[start_index+1].position.x << "," << map_graphic[start_index+1].position.y << "\t"
                 << map_graphic[start_index+2].position.x << "," << map_graphic[start_index+2].position.y << "\t"
                 << map_graphic[start_index].position.x << "," << map_graphic[start_index].position.y << "\t"
-                << map_graphic[start_index+3].position.x << "," << map_graphic[start_index+3].position.y << "\t\n\n";
+                << map_graphic[start_index+3].position.x << "," << map_graphic[start_index+3].position.y << "\t\n\n";*/
         map_graphic[start_index+1].texCoords = sf::Vector2f(
                 p_tile_type.tex_index.x*tile_length,
                 p_tile_type.tex_index.y*tile_length);

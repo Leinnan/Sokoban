@@ -21,11 +21,31 @@ namespace ar {
 					Intro intro(&window);
 					intro.run();
 				}
-                switchGameState();
+                switchGameState(2);
 			}
+            else if(game_state == 2){
+                std::clog  << "Start Menu- deklaracja \n";
+                ar::StartMenu start_menu(&window);
+                std::clog  << "Start Menu- Dodawanie opcji \n";
+                start_menu.addOption("Start game");
+                start_menu.addOption("Exit game");
+
+                std::clog  << "Start Menu- uruchomienie \n";
+                start_menu.run();
+
+                switch(start_menu.getSelectedOption()){
+                    case 0:
+                        switchGameState(DEFAULT_GAME_STATE);
+                        break;
+                    default:
+                        return;
+
+                }
+            }
 			if (game_state == DEFAULT_GAME_STATE) {
                 ar::Game game(&window);
                 game.run();
+                switchGameState(2);
             }
 			
 
