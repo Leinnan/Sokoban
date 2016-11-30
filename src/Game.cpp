@@ -180,7 +180,7 @@ namespace ar {
     void Game::update(sf::Time p_time_delta) {
         if (!is_paused && !level_complete) {
             if(player.isMoving()){
-                std::clog << "PLAYER UPDATE " << player.getPosition().x << ", " << player.getPosition().y << "\n";
+                //std::clog << "PLAYER UPDATE " << player.getPosition().x << ", " << player.getPosition().y << "\n";
                 sf::Vector2i destination_index = player.getDestinationTile();
                 if(!tilemap.isTilePassable(destination_index)){
                     player.canMove(false);
