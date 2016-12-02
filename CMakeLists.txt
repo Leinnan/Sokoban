@@ -57,3 +57,9 @@ include(InstallRequiredSystemLibraries)
 set(CPACK_PACKAGE_VERSION_MAJOR "${myproject_VERSION_MAJOR}")
 set(CPACK_PACKAGE_VERSION_MINOR "${myproject_VERSION_MINOR}")
 include(CPack)
+
+
+# copy files
+file(COPY "content/gfx" DESTINATION "${CMAKE_BINARY_DIR}")
+file(COPY "content/maps" DESTINATION "${CMAKE_BINARY_DIR}")
+file(COPY "content/maps_list.txt" DESTINATION "${CMAKE_BINARY_DIR}")

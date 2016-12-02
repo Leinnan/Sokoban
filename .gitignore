@@ -32,6 +32,7 @@
 /obj
 /bin
 /build/*
+/cmake-build-debug
 .vscode
 .codelite
 .idea
