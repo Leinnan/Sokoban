@@ -38,7 +38,7 @@ namespace ar {
                         switchGameState(DEFAULT_GAME_STATE);
                         break;
                     default:
-                        return;
+                        break;
 
                 }
             }

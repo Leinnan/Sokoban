@@ -31,11 +31,10 @@
 # My own
 /obj
 /bin
-/build/*
+/build
 /cmake-build-debug
 .vscode
 .codelite
 .idea
 *.project
-# this one because git is not good place for graphics :P
-/gfx 
+*.xcf
